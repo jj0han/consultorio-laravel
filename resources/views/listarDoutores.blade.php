@@ -26,7 +26,7 @@
             </td>
             <td>{{$doutor->nome}}</td>
             <td>
-            {{$doutor->cpf}}
+                {{$doutor->cpf}}
             </td>
             <td>
                 <div class="btns">

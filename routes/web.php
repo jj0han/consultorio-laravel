@@ -31,4 +31,9 @@ Route::get('/doutores/editar/{id}', [DoutoresController::class, 'editar']);
 Route::get('/doutores/visualizar/{id}', [DoutoresController::class, 'visualizar']);
 
 Route::get('/pacientes/listar', [PacientesController::class, 'listarPacientes']);
+Route::get('/pacientes/novo', [PacientesController::class, 'novo']);
+Route::post('/paciente/salvar', [PacientesController::class, 'salvar']);
+Route::get('/pacientes/excluir/{id}', [PacientesController::class, 'excluir']);
+Route::get('/pacientes/editar/{id}', [PacientesController::class, 'editar']);
+Route::get('/pacientes/visualizar/{id}', [PacientesController::class, 'visualizar']);
 require __DIR__.'/auth.php';
