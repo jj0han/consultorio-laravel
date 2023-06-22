@@ -30,7 +30,7 @@
                 {{$paciente->cpf}}
             </td>
             <td>
-                {{$paciente->data_nacimento}}
+                {{$paciente->data_nascimento}}
             </td>
             <td>
                 <div class="btns">

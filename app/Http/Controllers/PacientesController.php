@@ -48,6 +48,8 @@ class PacientesController extends Controller
             $request->input('nome');
         $pacientes->cpf =
             $request->input('cpf');
+        $pacientes->data_nascimento =
+            $request->input('data_nascimento');
         $pacientes->save();
         return redirect('pacientes/listar');
     }

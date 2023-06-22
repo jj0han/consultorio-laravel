@@ -18,22 +18,37 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
-Route::get('/agendamento/listar', [ConsultaController::class, 'listarAgendamento']);
+Route::get('/agendamento/listar', [ConsultaController::class, 'listarAgendamento'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/novo', [ConsultaController::class, 'novo'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::post('/agendamento/salvar', [ConsultaController::class, 'salvar'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/excluir/{id}', [ConsultaController::class, 'excluir'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/editar/{id}', [ConsultaController::class, 'editar'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/visualizar/{id}', [ConsultaController::class, 'visualizar'])->middleware(['auth', 'verified'])->name('agendamento');
 
-Route::get('/doutores/listar', [DoutoresController::class, 'listarDoutores']);
-Route::get('/doutores/novo', [DoutoresController::class, 'novo']);
-Route::post('/doutor/salvar', [DoutoresController::class, 'salvar']);
-Route::get('/doutores/excluir/{id}', [DoutoresController::class, 'excluir']);
-Route::get('/doutores/editar/{id}', [DoutoresController::class, 'editar']);
-Route::get('/doutores/visualizar/{id}', [DoutoresController::class, 'visualizar']);
 
-Route::get('/pacientes/listar', [PacientesController::class, 'listarPacientes']);
-Route::get('/pacientes/novo', [PacientesController::class, 'novo']);
-Route::post('/paciente/salvar', [PacientesController::class, 'salvar']);
-Route::get('/pacientes/excluir/{id}', [PacientesController::class, 'excluir']);
-Route::get('/pacientes/editar/{id}', [PacientesController::class, 'editar']);
-Route::get('/pacientes/visualizar/{id}', [PacientesController::class, 'visualizar']);
-require __DIR__.'/auth.php';
+// Rotas Doutores
+Route::get('/doutores/listar', [DoutoresController::class, 'listarDoutores'])->middleware(['auth', 'verified'])->name('doutores');
+Route::get('/doutores/novo', [DoutoresController::class, 'novo'])->middleware(['auth', 'verified'])->name('doutores');
+Route::post('/doutor/salvar', [DoutoresController::class, 'salvar'])->middleware(['auth', 'verified'])->name('doutores');
+Route::get('/doutores/excluir/{id}', [DoutoresController::class, 'excluir'])->middleware(['auth', 'verified'])->name('doutores');
+Route::get('/doutores/editar/{id}', [DoutoresController::class, 'editar'])->middleware(['auth', 'verified'])->name('doutores');
+Route::get('/doutores/visualizar/{id}', [DoutoresController::class, 'visualizar'])->middleware(['auth', 'verified'])->name('doutores');
+
+// Rotas Pacientes
+Route::get('/pacientes/listar', [PacientesController::class, 'listarPacientes'])->middleware(['auth', 'verified'])->name('pacientes');
+Route::get('/pacientes/novo', [PacientesController::class, 'novo'])->middleware(['auth', 'verified'])->name('pacientes');
+Route::post('/paciente/salvar', [PacientesController::class, 'salvar'])->middleware(['auth', 'verified'])->name('pacientes');
+Route::get('/pacientes/excluir/{id}', [PacientesController::class, 'excluir'])->middleware(['auth', 'verified'])->name('pacientes');
+Route::get('/pacientes/editar/{id}', [PacientesController::class, 'editar'])->middleware(['auth', 'verified'])->name('pacientes');
+Route::get('/pacientes/visualizar/{id}', [PacientesController::class, 'visualizar'])->middleware(['auth', 'verified'])->name('pacientes');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
