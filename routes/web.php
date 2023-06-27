@@ -4,6 +4,7 @@ use App\Http\Controllers\AreasController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\DoutoresController;
 use App\Http\Controllers\PacientesController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/', function () {
 Route::get('/agendamento/listar', [ConsultaController::class, 'listarAgendamento'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/novo', [ConsultaController::class, 'novo'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::post('/agendamento/salvar', [ConsultaController::class, 'salvar'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/pdf', [PdfController::class, 'gerarPdf'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/excluir/{id}', [ConsultaController::class, 'excluir'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/editar/{id}', [ConsultaController::class, 'editar'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/visualizar/{id}', [ConsultaController::class, 'visualizar'])->middleware(['auth', 'verified'])->name('agendamento');

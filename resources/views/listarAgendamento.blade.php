@@ -4,6 +4,7 @@
 <div class="d-flex align-items-center gap-3">
     <h1>Agendamento Médico</h1>
     <a class="btn btn-primary" href="novo">Cadastrar Novo</a>
+    <a class="btn btn-primary" href="pdf">Gerar PDF</a>
 </div>
 <table class="table">
     <thead class="thead">

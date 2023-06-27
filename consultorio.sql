@@ -5,6 +5,11 @@ CREATE TABLE doutores (
     figura character varying(200),
 );
 
+CREATE TABLE areas (
+    id integer NOT NULL,
+    nome character varying(200),
+);
+
 CREATE TABLE pacientes (
     id integer NOT NULL,
     nome character varying(200),
