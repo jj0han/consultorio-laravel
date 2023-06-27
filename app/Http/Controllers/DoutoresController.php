@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Areas;
 use App\Models\Doutores;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DoutoresController extends Controller
 {
   function listarDoutores()
   {
-    $doutores = Doutores::orderBy('nome')->get();
+    $doutores = DB::table('doutores')
+      ->join('areas', 'areas.id', '=', 'doutores.id_area')
+      ->select('doutores.*', 'doutores.id_area AS id_area', 'areas.nome AS nome_area')
+      ->get();
     return view(
       'listarDoutores',
       compact('doutores')
@@ -21,7 +27,10 @@ class DoutoresController extends Controller
   {
     $doutor = new Doutores();
     $doutor->id = 0;
-    return view('frmDoutor', compact('doutor'));
+
+    $areas = Areas::orderBy('nome')->get();
+
+    return view('frmDoutor', compact('doutor', 'areas'));
   }
 
   function salvar(Request $request)
@@ -48,6 +57,8 @@ class DoutoresController extends Controller
       $request->input('nome');
     $doutores->cpf =
       $request->input('cpf');
+    $doutores->id_area =
+      $request->input('id_area');
     $doutores->save();
     return redirect('doutores/listar');
   }
@@ -55,15 +66,20 @@ class DoutoresController extends Controller
   function editar($id)
   {
     $doutor = Doutores::find($id);
+    $areas = Areas::all();
     return view(
       'frmDoutor',
-      compact('doutor')
+      compact('doutor', 'areas')
     );
   }
 
   function visualizar($id)
   {
-    $doutor = Doutores::find($id);
+    $doutor = DB::table('doutores')
+      ->join('areas', 'areas.id', '=', 'doutores.id_area')
+      ->select('doutores.*', 'doutores.id_area AS id_area', 'areas.nome AS nome_area')
+      ->where('doutores.id', $id)
+      ->first();
     return view(
       'visualizarDoutor',
       compact('doutor')
@@ -72,8 +88,13 @@ class DoutoresController extends Controller
 
   function excluir($id)
   {
-    $doutores = Doutores::find($id);
-    $doutores->delete();
-    return redirect('doutores/listar');
+    try {
+      $doutores = Doutores::find($id);
+      $doutores->delete();
+      return redirect('doutores/listar');
+
+    } catch (Exception $e) {
+      return redirect('doutores/listar')->with('error', 'Este Doutor está atrelado a uma consulta!');
+    }
   }
 }

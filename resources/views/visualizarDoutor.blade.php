@@ -21,5 +21,9 @@
         <label for="cpf" class="form-label">CPF</label>
         <input readonly class="form-control" type="text" name="cpf" value="{{$doutor->cpf}}">
     </div>
+    <div class="mb-3">
+        <label for="cpf" class="form-label">Area de Atuação</label>
+        <input readonly class="form-control" type="text" name="cpf" value="{{$doutor->nome_area}}">
+    </div>
 </form>
 @endsection

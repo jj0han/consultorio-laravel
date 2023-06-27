@@ -15,7 +15,6 @@ CREATE TABLE pacientes (
     created_at date,
 );
 
-
 CREATE TABLE consultas (
   id SERIAL PRIMARY KEY,
   id_paciente INTEGER,
@@ -27,4 +26,15 @@ CREATE TABLE consultas (
 
   FOREIGN KEY (id_paciente) REFERENCES pacientes (id),
   FOREIGN KEY (id_doutor) REFERENCES doutores (id)
+);
+
+CREATE TABLE doutores_areas (
+  id SERIAL PRIMARY KEY,
+	id_doutor INTEGER,
+  id_area INTEGER,
+  updated_at date,
+  created_at date,
+
+  FOREIGN KEY (id_doutor) REFERENCES doutores (id),
+	FOREIGN KEY (id_area) REFERENCES areas (id)
 );

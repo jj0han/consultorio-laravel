@@ -12,7 +12,6 @@
             <th scope="col">Nome do paciente</th>
             <th scope="col">Data/Hora</th>
             <th scope="col">Doutor</th>
-            <th scope="col">Descrição</th>
             <th scope="col">Funcionalidades</th>
         </tr>
     </thead>
@@ -25,7 +24,6 @@
             <td>
                 {{$consulta->nome_doutor}}
             </td>
-            <td>{{$consulta->descricao}}</td>
             <td>
                 <div class="btns">
                     <a href="visualizar/{{$consulta->id}}"><button class="btn btn-outline-primary">Visualizar</button></a>

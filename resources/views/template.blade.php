@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{url('pacientes/listar')}}">Pacientes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('areas/listar')}}">Áreas de Atuação</a>
+                    </li>
                 </ul>
             </div>
         </div>
