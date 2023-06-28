@@ -15,19 +15,25 @@
                 <tr>
                     <th style="border: 1px solid black;">ID</th>
                     <th style="border: 1px solid black;">Data</th>
+                    <th style="border: 1px solid black;">Horário</th>
                     <th style="border: 1px solid black;">Paciente</th>
                     <th style="border: 1px solid black;">Doutor</th>
+                    <th style="border: 1px solid black;">Área de Atuação</th>
+                    <th style="border: 1px solid black;">Descrição</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($consultas as $consulta)
                 <tr>
-                    <td style="border: 1px solid black;">{{$consulta->id}}</td>
-                    <td style="border: 1px solid black;">{{$consulta->data}}</td>
-                    <td style="border: 1px solid black;">{{$consulta->nome_paciente}}</td>
-                    <td style="border: 1px solid black;">
+                    <td style="border: 1px solid black; padding: 1px; font-size: 14px;">{{$consulta->id}}</td>
+                    <td style="border: 1px solid black; padding: 2px; font-size: 14px;">{{$consulta->data}}</td>
+                    <td style="border: 1px solid black; padding: 2px; font-size: 14px;">{{$consulta->horario}}</td>
+                    <td style="border: 1px solid black; padding: 3px; font-size: 14px;">{{$consulta->nome_paciente}}</td>
+                    <td style="border: 1px solid black; padding: 3px; font-size: 14px;">
                         {{$consulta->nome_doutor}}
                     </td>
+                    <td style="border: 1px solid black; padding: 3px; font-size: 14px;">{{$consulta->area_nome}}</td>
+                    <td style="border: 1px solid black; padding: 3px; font-size: 14px;">{{$consulta->descricao}}</td>
                 </tr>
                 @endforeach
             </tbody>

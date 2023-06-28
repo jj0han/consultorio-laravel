@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pacientes;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,8 +75,12 @@ class PacientesController extends Controller
 
     function excluir($id)
     {
-        $pacientes = Pacientes::find($id);
-        $pacientes->delete();
-        return redirect('pacientes/listar');
+        try {
+            $pacientes = Pacientes::find($id);
+            $pacientes->delete();
+            return redirect('pacientes/listar');
+        } catch (Exception $e) {
+            return redirect('pacientes/listar')->with('error', 'Este Paciente está atrelado a uma consulta!');
+        }
     }
 }

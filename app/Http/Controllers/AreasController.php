@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Areas;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,19 +50,12 @@ class AreasController extends Controller
 
     function excluir($id)
     {
-        $area = Areas::find($id);
-
-        $doutor_area_id = DB::table('doutores')
-            ->select('doutores.id_area', 'doutores.id_area AS id_area')
-            ->get();
-
-        foreach ($doutor_area_id as $area_id) {
-            if($area_id = $id) {
-                return redirect('areas/listar')->with('error', 'Este Area está atrelada a um doutor!');
-            }
+        try {
+            $area = Areas::find($id);
+            $area->delete();
+            return redirect('areas/listar');
+        } catch (Exception $e) {
+            return redirect('areas/listar')->with('error', 'Esta Area está atrelada a um Doutor!');
         }
-
-        $area->delete();
-        return redirect('areas/listar');
     }
 }

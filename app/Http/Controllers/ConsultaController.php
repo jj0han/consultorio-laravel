@@ -46,6 +46,7 @@ class ConsultaController extends Controller
         $agendamentos->data = $request->input("data");
         $agendamentos->id_doutor = $request->input("id_doutor");
         $agendamentos->descricao = $request->input("descricao");
+        $agendamentos->horario = $request->input("horario");
         $agendamentos->save();
 
         return redirect('agendamento/listar');
@@ -71,7 +72,7 @@ class ConsultaController extends Controller
         $agendamento = DB::table('consultas')
             ->join('doutores', 'consultas.id_doutor', '=', 'doutores.id')
             ->join('pacientes', 'consultas.id_paciente', '=', 'pacientes.id')
-            ->select('consultas.data', 'consultas.descricao', 'consultas.id')
+            ->select('consultas.*', 'doutores.nome AS nome_doutor', 'pacientes.nome AS nome_paciente')
             ->where('consultas.id', $id)
             ->first();
 

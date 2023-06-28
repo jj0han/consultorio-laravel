@@ -28,6 +28,7 @@ Route::get('/agendamento/listar', [ConsultaController::class, 'listarAgendamento
 Route::get('/agendamento/novo', [ConsultaController::class, 'novo'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::post('/agendamento/salvar', [ConsultaController::class, 'salvar'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/pdf', [PdfController::class, 'gerarPdf'])->middleware(['auth', 'verified'])->name('agendamento');
+Route::get('/agendamento/pdfDtl', [PdfController::class, 'gerarPdfDetalhado'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/excluir/{id}', [ConsultaController::class, 'excluir'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/editar/{id}', [ConsultaController::class, 'editar'])->middleware(['auth', 'verified'])->name('agendamento');
 Route::get('/agendamento/visualizar/{id}', [ConsultaController::class, 'visualizar'])->middleware(['auth', 'verified'])->name('agendamento');
